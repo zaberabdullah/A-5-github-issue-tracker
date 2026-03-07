@@ -1,0 +1,81 @@
+let allIssues = [];
+
+const loadIssues = async () => {
+  const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+  const result = await res.json();
+  allIssues = result.data;
+  displayIssues(allIssues);
+  document.getElementById("total-issue-count").innerText = allIssues.length;
+};
+
+loadIssues();
+
+const displayIssues = (issues)=> {
+    const IssueContainer = document.getElementById("issue-container");
+
+    if(IssueContainer) {
+        IssueContainer.innerHTML = "";
+
+        issues.forEach((issue)=>{
+            const card = document.createElement("div");
+            const isOpen = issue.status === 'open';
+            const borderColor = isOpen ? "border-green-500" : "border-purple-500";
+            const iconClass = isOpen ? "fa-circle-check" : "fa-circle-xmark";
+            const isColor = isOpen ? "text-green-500" : "text-purple-500";
+            const iconBg = isOpen ? "bg-white" : "bg-[#F5F3FF]";
+
+            let badgeColor = "";
+            const priority = issue.priority.toLowerCase();
+            if (priority === "high") {
+                badgeColor = "bg-red-100 text-red-600";
+            } else if (priority === "medium") {
+                badgeColor = "bg-amber-100 text-amber-600";
+            } else if (priority === "low") {
+                badgeColor = "bg-gray-100 text-gray-600";
+            }
+
+            card.className = `bg-white border-t-4 ${borderColor} rounded-2xl shadow-sm p-6 flex flex-col gap-4`
+
+            card.innerHTML= `
+        
+            <div class="flex justify-between items-start">
+                <div class="w-10 h-10 ${iconBg} rounded-full flex items-center justify-center ${isColor}">
+            <i class="fa-solid ${iconClass} text-xl"></i>
+                </div>
+                <span class="px-3 py-1 ${badgeColor} text-[10px] font-bold rounded-full uppercase">${issue.priority}</span>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-bold text-[#1F2937]">
+                    ${issue.title}
+                </h3>
+                <p class="text-[#64748B] text-sm mt-2 line-clamp-2">${issue.description}</p>
+            </div>
+            <div class="flex flex-wrap gap-2"> ${issue.labels.map(label => `
+        <span class="px-2 py-1 bg-amber-100 text-amber-600 text-[10px] rounded-md font-bold uppercase"># ${label}</span>`).join('')} </div>
+    <hr class="border-slate-100">
+    <div class="flex justify-between items-center text-slate-400 text-[11px] font-semibold">
+        <span>#${issue.id} by ${issue.author}</span>
+        <span>${new Date(issue.createdAt).toLocaleDateString()}</span>
+    </div>
+        </div>
+            `;
+            IssueContainer.appendChild(card);
+
+        });
+    }
+}
+
+document.getElementById("all-btn").addEventListener("click", function() {
+    displayIssues(allIssues);
+});
+
+document.getElementById("open-btn").addEventListener("click", function() {
+    const openIssues = allIssues.filter(issue => issue.status === 'open');
+    displayIssues(openIssues);
+});
+
+document.getElementById("closed-btn").addEventListener("click", function() {
+    const closedIssues = allIssues.filter(issue => issue.status === 'closed');
+    displayIssues(closedIssues);
+});

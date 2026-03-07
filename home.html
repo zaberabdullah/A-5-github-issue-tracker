@@ -36,15 +36,32 @@
           </div>
         </div>
         <div class="flex gap-2">
-        <div>
+          <div>
             <span class=""><i class="fa-solid fa-magnifying-glass"></i></span>
             <input type="text" placeholder="Search issues..." class="input input-bordered w-24 md:w-auto" />
-        </div>
-            <div class="dropdown dropdown-end">
-              <button class="btn btn-primary"><i class="fa-solid fa-plus"></i>New Issue</button>
-            </div>
+          </div>
+          <div class="dropdown dropdown-end">
+            <button class="btn btn-primary">Search Issue</button>
+          </div>
         </div>
       </div>
     </section>
+
+    <section class="my-10 flex justify-start border border-gray-100 shadow-sm p-6 rounded-2xl">
+        <div class="flex items-center gap-3">
+            <button id="all-btn" class="btn join-item px-8 bg-[#4A00FF] border border-gray-300 text-white rounded-xl hover:bg-black">
+                All
+            </button>
+            <button id="open-btn" class="btn join-item px-8 bg-white text-gray-600 border border-gray-300 rounded-xl hover:bg-black hover:text-white">
+                Open
+            </button>
+            <button id="closed-btn" class="btn join-item px-8 bg-white text-gray-600 border border-gray-300 rounded-xl hover:bg-black  hover:text-white">
+                Closed
+            </button>   
+        </div>
+    </section>
+
+    
+
   </body>
 </html>

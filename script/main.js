@@ -8,7 +8,6 @@ const loadIssues = async () => {
   document.getElementById("total-issue-count").innerText = allIssues.length;
 };
 
-loadIssues();
 
 const displayIssues = (issues)=> {
     const IssueContainer = document.getElementById("issue-container");
@@ -50,32 +49,67 @@ const displayIssues = (issues)=> {
                     ${issue.title}
                 </h3>
                 <p class="text-[#64748B] text-sm mt-2 line-clamp-2">${issue.description}</p>
-            </div>
+                </div>
             <div class="flex flex-wrap gap-2"> ${issue.labels.map(label => `
-        <span class="px-2 py-1 bg-amber-100 text-amber-600 text-[10px] rounded-md font-bold uppercase"># ${label}</span>`).join('')} </div>
-    <hr class="border-slate-100">
-    <div class="flex justify-between items-center text-slate-400 text-[11px] font-semibold">
+                <span class="px-2 py-1 bg-amber-100 text-amber-600 text-[10px] rounded-md font-bold uppercase"># ${label}</span>`).join('')} </div>
+                <hr class="border-slate-100">
+                <div class="flex justify-between items-center text-slate-400 text-[11px] font-semibold">
         <span>#${issue.id} by ${issue.author}</span>
         <span>${new Date(issue.createdAt).toLocaleDateString()}</span>
     </div>
-        </div>
+    </div>
             `;
             IssueContainer.appendChild(card);
 
         });
     }
+};
+
+const updateCount = (number) => {
+    const countElement = document.getElementById("total-issue-count");
+    if(countElement){
+        countElement.innerText = number;
+    }
 }
 
+const setActiveButton = (buttonId) => {
+    const buttonIds = ["all-btn", "open-btn", "closed-btn"];
+    buttonIds.forEach(id => {
+        const btn = document.getElementById(id);
+        if(btn){
+            btn.classList.remove("bg-[#4A00FF]", "text-white");
+            btn.classList.add("bg-white", "text-gray-700");
+        }
+    });
+
+
+const activeBtn = document.getElementById(buttonId);
+if(activeBtn){
+    activeBtn.classList.add("bg-[#4A00FF]", "text-white");
+    activeBtn.classList.remove("bg-white", "text-gray-700");
+}
+};
+
 document.getElementById("all-btn").addEventListener("click", function() {
+    setActiveButton("all-btn");
     displayIssues(allIssues);
+    updateCount(allIssues.length);
 });
 
 document.getElementById("open-btn").addEventListener("click", function() {
+    setActiveButton("open-btn");
     const openIssues = allIssues.filter(issue => issue.status === 'open');
     displayIssues(openIssues);
+    updateCount(openIssues.length);
 });
 
 document.getElementById("closed-btn").addEventListener("click", function() {
+    setActiveButton("closed-btn");
     const closedIssues = allIssues.filter(issue => issue.status === 'closed');
     displayIssues(closedIssues);
+    updateCount(closedIssues.length);
 });
+
+
+loadIssues();
+

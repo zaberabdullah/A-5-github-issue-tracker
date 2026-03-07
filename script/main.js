@@ -1,11 +1,27 @@
 let allIssues = [];
 
+const manageSpinner = (status) => {
+    if(status === true){
+        document.getElementById("loading-spinner").classList.remove("hidden");
+        document.getElementById("issue-container").classList.add("hidden");
+    }else{
+        document.getElementById("loading-spinner").classList.add("hidden");
+        document.getElementById("issue-container").classList.remove("hidden");
+    }
+};
+
+
+
 const loadIssues = async () => {
+
+    manageSpinner(true);
+
   const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
   const result = await res.json();
   allIssues = result.data;
   displayIssues(allIssues);
   document.getElementById("total-issue-count").innerText = allIssues.length;
+    manageSpinner(false);
 };
 
 
@@ -65,6 +81,7 @@ const displayIssues = (issues)=> {
     }
 };
 
+
 const updateCount = (number) => {
     const countElement = document.getElementById("total-issue-count");
     if(countElement){
@@ -78,7 +95,7 @@ const setActiveButton = (buttonId) => {
         const btn = document.getElementById(id);
         if(btn){
             btn.classList.remove("bg-[#4A00FF]", "text-white");
-            btn.classList.add("bg-white", "text-gray-700");
+            btn.classList.add("bg-white", "text-black");
         }
     });
 
@@ -86,7 +103,7 @@ const setActiveButton = (buttonId) => {
 const activeBtn = document.getElementById(buttonId);
 if(activeBtn){
     activeBtn.classList.add("bg-[#4A00FF]", "text-white");
-    activeBtn.classList.remove("bg-white", "text-gray-700");
+    activeBtn.classList.remove("bg-white", "text-black");
 }
 };
 
@@ -109,6 +126,7 @@ document.getElementById("closed-btn").addEventListener("click", function() {
     displayIssues(closedIssues);
     updateCount(closedIssues.length);
 });
+
 
 
 loadIssues();

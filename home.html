@@ -48,20 +48,53 @@
     </section>
 
     <section class="my-10 flex justify-start border border-gray-100 shadow-sm p-6 rounded-2xl">
-        <div class="flex items-center gap-3">
-            <button id="all-btn" class="btn join-item px-8 bg-[#4A00FF] border border-gray-300 text-white rounded-xl hover:bg-black">
-                All
-            </button>
-            <button id="open-btn" class="btn join-item px-8 bg-white text-gray-600 border border-gray-300 rounded-xl hover:bg-black hover:text-white">
-                Open
-            </button>
-            <button id="closed-btn" class="btn join-item px-8 bg-white text-gray-600 border border-gray-300 rounded-xl hover:bg-black  hover:text-white">
-                Closed
-            </button>   
-        </div>
+      <div class="flex items-center gap-3">
+        <button
+          id="all-btn"
+          class="btn join-item px-8 bg-[#4A00FF] border border-gray-300 text-white rounded-xl hover:bg-black"
+        >
+          All
+        </button>
+        <button
+          id="open-btn"
+          class="btn join-item px-8 bg-white text-gray-600 border border-gray-300 rounded-xl hover:bg-black hover:text-white"
+        >
+          Open
+        </button>
+        <button
+          id="closed-btn"
+          class="btn join-item px-8 bg-white text-gray-600 border border-gray-300 rounded-xl hover:bg-black hover:text-white"
+        >
+          Closed
+        </button>
+      </div>
     </section>
 
-    
+    <section
+      class="mt-8 bg-white border border-gray-100 shadow-sm rounded-3xl p-6 flex flex-col md:flex-row justify-between items-center gap-4"
+    >
+      <div class="flex items-center gap-1">
+        <div class="w-14 h-14 flex items-center justify-center">
+          <i class="fa-solid fa-bug text-3xl"></i>
+        </div>
 
+        <div>
+          <h2 class="text-xl font-bold">50 Issues</h2>
+          <p class="text-[#64748B] text-sm font-medium">Track and manage your project issues</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 text-sm font-bold">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 bg-[#10B981] rounded-full shadow-sm"></span>
+          <span class="font-bold">Open</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 bg-[#8B5CF6] rounded-full shadow-sm"></span>
+          <span class="font-bold">Closed</span>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

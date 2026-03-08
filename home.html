@@ -51,7 +51,7 @@
       <div class="flex items-center gap-3">
         <button
           id="all-btn"
-          class="btn join-item px-8 bg-[#4A00FF] border border-gray-300 text-white rounded-xl hover:bg-black  hover:text-white"
+          class="btn join-item px-8 bg-[#4A00FF] border border-gray-300 text-white rounded-xl hover:bg-black hover:text-white"
         >
           All
         </button>
@@ -97,11 +97,33 @@
       </div>
     </section>
 
-    <div id="loading-spinner" class="flex justify-center items-center my-20 hidden"><span class="loading loading-spinner loading-xl"></span></div>
-
-    <div id="issue-container" class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-
+    <div id="loading-spinner" class="flex justify-center items-center my-20 hidden">
+      <span class="loading loading-spinner loading-xl"></span>
     </div>
+
+    <div id="issue-container" class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10"></div>
+
+    <!-- modal -->
+
+    <dialog id="issue_modal" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+
+        <div id="details-container" class="space-y-5">
+          
+
+        </div>
+        <div class="modal-action">
+          <form method="dialog">
+            
+            <button class="btn bg-[#4A00FF] hover:bg-black text-white px-8 border-none rounded-lg">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+
+
+
 
     <script src="script/main.js"></script>
   </body>

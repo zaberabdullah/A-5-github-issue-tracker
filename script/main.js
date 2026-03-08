@@ -42,11 +42,11 @@ const displayIssueDetails = (issue) => {
           </div>
 
          <div class="flex flex-wrap gap-2"> ${issue.labels
-              .map(
-                (label) => `
+           .map(
+             (label) => `
                 <span class="px-2 py-1 bg-amber-100 text-amber-600 text-[10px] rounded-md font-bold uppercase"># ${label}</span>`,
-              )
-              .join("")} </div>
+           )
+           .join("")} </div>
 
           <p class="text-lg mb-8 text-[#64748B]">${issue.description}</p>
 
@@ -67,8 +67,6 @@ const displayIssueDetails = (issue) => {
     document.getElementById("issue_modal").showModal();
   }
 };
-
-
 
 const displayIssues = (issues) => {
   const IssueContainer = document.getElementById("issue-container");
@@ -173,5 +171,22 @@ document.getElementById("closed-btn").addEventListener("click", function () {
   displayIssues(closedIssues);
   updateCount(closedIssues.length);
 });
+
+const handleSearch = async () => {
+  const searchValue = document.getElementById("input-search").value;
+  if (searchValue === "") {
+    displayIssues(allIssues);
+    updateCount(allIssues.length);
+    return;
+  }
+  const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`);
+  const result = await res.json();
+  if (result.data) {
+    displayIssues(result.data);
+    updateCount(result.data.length);
+  }
+};
+
+document.getElementById("btn-search").addEventListener("click", handleSearch);
 
 loadIssues();

@@ -179,12 +179,14 @@ const handleSearch = async () => {
     updateCount(allIssues.length);
     return;
   }
+  manageSpinner(true);
   const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`);
   const result = await res.json();
   if (result.data) {
     displayIssues(result.data);
     updateCount(result.data.length);
   }
+  manageSpinner(false);
 };
 
 document.getElementById("btn-search").addEventListener("click", handleSearch);

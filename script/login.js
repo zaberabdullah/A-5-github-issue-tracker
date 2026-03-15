@@ -8,7 +8,7 @@ loginForm.addEventListener('submit', function(event){
     
 if (username === 'admin' && password === 'admin123'){
     alert('Welcome! Login Successful.');
-    window.location.assign("/home.html")
+    window.location.assign("../home.html")
 
 }else{
     alert('Invalid credentials. Please use admin/admin123');
